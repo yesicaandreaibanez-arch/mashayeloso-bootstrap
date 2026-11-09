@@ -1,0 +1,619 @@
+/* ================================================================
+   EVIDENCIA 21: Desarrollo de aplicativo Bootstrap
+   Hoja de estilos personalizada — Masha y el Oso
+   Técnico en Programación de Software · SENA (Código 233104)
+
+   Estructura:
+   1.  Variables y tipografía
+   2.  Skip link (accesibilidad)
+   3.  Navbar
+   4.  Hero
+   5.  Estadísticas
+   6.  Personajes
+   7.  Episodios
+   8.  Banner central
+   9.  Galería
+  10.  FAQ
+  11.  Formulario de contacto
+  12.  Footer
+  13.  Botón volver arriba
+  14.  Utilidades / tokens de color
+  15.  Responsive adicional
+  16.  Animaciones
+  17.  Accesibilidad (focus-visible)
+================================================================ */
+
+/* ----------------------------------------------------------------
+   1. VARIABLES Y TIPOGRAFÍA
+---------------------------------------------------------------- */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@400;600;700;800;900&display=swap');
+
+:root {
+  --color-primario:   #e74c3c;
+  --color-secundario: #f39c12;
+  --color-bosque:     #27ae60;
+  --color-cielo:      #3498db;
+  --color-marron:     #a0522d;
+  --color-lila:       #9b59b6;
+
+  --radio-card:       0.85rem;
+  --sombra-suave:     0 4px 16px rgba(0,0,0,.10);
+  --sombra-media:     0 8px 32px rgba(0,0,0,.15);
+  --sombra-fuerte:    0 12px 40px rgba(0,0,0,.22);
+
+  --trans: 0.25s ease;
+}
+
+*,
+*::before,
+*::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  font-size: 1rem;
+  color: #333;
+  overflow-x: hidden;
+  background: #fff;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Fredoka One', 'Nunito', sans-serif;
+  letter-spacing: .4px;
+}
+
+/* ----------------------------------------------------------------
+   2. SKIP LINK — ACCESIBILIDAD TECLADO
+---------------------------------------------------------------- */
+.skip-link {
+  background: var(--color-primario);
+  color: #fff;
+  padding: .6rem 1.2rem;
+  position: fixed;
+  top: 0; left: 0;
+  z-index: 9999;
+  border-radius: 0 0 .5rem 0;
+  font-weight: 700;
+  text-decoration: none;
+  transform: translateY(-120%);
+  transition: transform var(--trans);
+}
+.skip-link:focus { transform: translateY(0); }
+
+/* ----------------------------------------------------------------
+   3. NAVBAR
+---------------------------------------------------------------- */
+#navbarSitio {
+  background: linear-gradient(135deg, #c0392b 0%, #e74c3c 50%, #a93226 100%);
+}
+
+.navbar-logo {
+  height: 42px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 4px rgba(0,0,0,.3));
+  transition: transform var(--trans);
+}
+.navbar-logo:hover { transform: scale(1.08) rotate(-3deg); }
+
+.navbar-brand { font-size: 1.25rem; letter-spacing: .3px; }
+
+.nav-link {
+  font-weight: 700;
+  border-radius: .4rem;
+  padding: .45rem .85rem;
+  transition: background-color var(--trans), color var(--trans);
+}
+.nav-link:hover,
+.nav-link:focus { background: rgba(255,255,255,.15); }
+
+/* ----------------------------------------------------------------
+   4. HERO
+---------------------------------------------------------------- */
+.hero-section {
+  position: relative;
+  background: linear-gradient(135deg,
+    #c0392b 0%,
+    #e74c3c 25%,
+    #8e44ad 60%,
+    #2980b9 100%);
+  overflow: hidden;
+}
+
+/* Patrón decorativo de lunares semitransparentes */
+.hero-patron {
+  position: absolute;
+  inset: 0;
+  background-image:
+    radial-gradient(circle at 15% 85%, rgba(255,255,255,.07) 0%, transparent 40%),
+    radial-gradient(circle at 85% 15%, rgba(255,255,255,.06) 0%, transparent 40%),
+    radial-gradient(circle at 50% 50%, rgba(255,255,255,.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+
+.hero-container { padding-top: 2rem; padding-bottom: 2rem; }
+
+.hero-badge {
+  background: rgba(255,255,255,.18);
+  color: #fff;
+  border: 1px solid rgba(255,255,255,.3);
+  backdrop-filter: blur(4px);
+  font-weight: 700;
+}
+
+.hero-titulo { text-shadow: 0 2px 12px rgba(0,0,0,.25); }
+.hero-desc   { text-shadow: 0 1px 6px rgba(0,0,0,.2); opacity: .95; }
+
+/* Imagen principal del hero */
+.hero-img-wrap { position: relative; display: inline-block; }
+
+.hero-img {
+  max-height: 520px;
+  object-fit: contain;
+  filter: drop-shadow(0 12px 32px rgba(0,0,0,.35));
+  animation: flotarHero 4s ease-in-out infinite;
+}
+
+/* Imágenes decorativas flotantes pequeñas */
+.hero-deco {
+  position: absolute;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.25));
+}
+.hero-deco-1 {
+  width: 90px;
+  bottom: 10%;
+  left: -20px;
+  animation: flotarDeco 3s ease-in-out infinite 0.5s;
+}
+.hero-deco-2 {
+  width: 70px;
+  top: 8%;
+  right: -10px;
+  animation: flotarDeco 3.5s ease-in-out infinite 1s;
+}
+
+/* Mini estadísticas en el hero */
+.hero-mini-stat {
+  background: rgba(255,255,255,.12);
+  border: 1px solid rgba(255,255,255,.2);
+  border-radius: .6rem;
+  padding: .6rem 1rem;
+  backdrop-filter: blur(4px);
+  min-width: 90px;
+}
+
+/* Ola inferior del hero */
+.hero-ola {
+  position: absolute;
+  bottom: -1px;
+  left: 0;
+  right: 0;
+  line-height: 0;
+}
+.hero-ola svg { display: block; width: 100%; }
+
+/* Altura mínima para pantallas grandes */
+@media (min-width: 992px) {
+  .min-vh-90 { min-height: 88vh; }
+}
+@media (max-width: 991.98px) {
+  .hero-img { max-height: 320px; }
+  .hero-titulo { font-size: 2.5rem; }
+}
+
+/* ----------------------------------------------------------------
+   5. ESTADÍSTICAS
+---------------------------------------------------------------- */
+.stat-card {
+  border-radius: var(--radio-card);
+  transition: transform var(--trans), box-shadow var(--trans);
+}
+.stat-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--sombra-fuerte) !important;
+}
+
+.stat-img {
+  height: 72px;
+  width: auto;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto;
+  filter: drop-shadow(0 3px 6px rgba(0,0,0,.15));
+}
+
+/* ----------------------------------------------------------------
+   6. PERSONAJES
+---------------------------------------------------------------- */
+.personajes-section {
+  background: linear-gradient(180deg, #fff 0%, #fdf6f0 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Imagen de fondo decorativa con baja opacidad */
+.personajes-bg-deco {
+  position: absolute;
+  right: -80px;
+  top: 50%;
+  transform: translateY(-50%);
+  pointer-events: none;
+  z-index: 0;
+  opacity: .05;
+}
+.personajes-bg-img {
+  width: 500px;
+  max-width: none;
+}
+
+/* Separador degradado */
+.separador {
+  width: 70px;
+  height: 5px;
+  border-radius: 3px;
+  background: linear-gradient(90deg, var(--color-primario), var(--color-secundario));
+  margin-top: .8rem;
+  margin-bottom: .4rem;
+}
+
+/* Tarjeta de personaje */
+.personaje-card {
+  border-radius: var(--radio-card);
+  overflow: hidden;
+  transition: transform var(--trans), box-shadow var(--trans);
+}
+.personaje-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--sombra-fuerte) !important;
+}
+
+/* Cabecera coloreada */
+.personaje-header {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 190px;
+}
+
+/* Imagen PNG real del personaje */
+.personaje-img {
+  height: 160px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.20));
+  transition: transform var(--trans);
+}
+.personaje-card:hover .personaje-img {
+  transform: scale(1.08) translateY(-4px);
+}
+
+/* Colores de cabecera por personaje */
+.bg-masha    { background: linear-gradient(135deg, #fce4ec, #f8bbd0); }
+.bg-oso      { background: linear-gradient(135deg, #d7ccc8, #bcaaa4); }
+.bg-duo      { background: linear-gradient(135deg, #ede7f6, #d1c4e9); }
+.bg-villanos { background: linear-gradient(135deg, #eceff1, #cfd8dc); }
+.bg-liebres  { background: linear-gradient(135deg, #e1f5fe, #b3e5fc); }
+.bg-pinguinos{ background: linear-gradient(135deg, #e3f2fd, #bbdefb); }
+
+/* Badge de color personalizado */
+.badge.bg-purple { background-color: var(--color-lila) !important; }
+
+/* Botón marrón para El Oso */
+.btn-oso {
+  background: var(--color-marron);
+  color: #fff;
+  border: none;
+}
+.btn-oso:hover,
+.btn-oso:focus {
+  background: #8b4513;
+  color: #fff;
+}
+
+/* ----------------------------------------------------------------
+   7. EPISODIOS
+---------------------------------------------------------------- */
+.episodio-card {
+  border-radius: var(--radio-card);
+  overflow: hidden;
+  transition: transform var(--trans), box-shadow var(--trans);
+}
+.episodio-card:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--sombra-fuerte) !important;
+}
+
+.episodio-img-wrap { overflow: hidden; }
+
+.episodio-img {
+  height: 220px;
+  width: 100%;
+  object-fit: cover;
+  object-position: center top;
+  transition: transform .4s ease;
+  background: #f0f0f0;
+}
+.episodio-card:hover .episodio-img {
+  transform: scale(1.06);
+}
+
+.episodio-badge { font-size: .85rem !important; }
+
+/* ----------------------------------------------------------------
+   8. BANNER CENTRAL
+---------------------------------------------------------------- */
+.banner-central { overflow: hidden; }
+
+.banner-col { overflow: hidden; max-height: 380px; }
+
+.banner-col-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transition: transform .6s ease;
+}
+.banner-col:hover .banner-col-img { transform: scale(1.05); }
+
+.banner-centro {
+  background: linear-gradient(135deg, #c0392b 0%, #9b59b6 100%);
+}
+
+.banner-logo {
+  max-height: 120px;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.3));
+}
+
+/* ----------------------------------------------------------------
+   9. GALERÍA
+---------------------------------------------------------------- */
+.galeria-item {
+  position: relative;
+  cursor: pointer;
+  transition: transform var(--trans), box-shadow var(--trans);
+  background: #f5f5f5;
+}
+.galeria-item:hover {
+  transform: scale(1.04);
+  box-shadow: var(--sombra-fuerte) !important;
+}
+.galeria-item:focus {
+  outline: 3px solid var(--color-secundario);
+  outline-offset: 3px;
+}
+
+/* Foto de galería: cuadrada adaptativa con object-fit */
+.galeria-foto {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  background: #eee;
+  transition: opacity var(--trans);
+}
+
+/* Overlay con lupa al hacer hover */
+.galeria-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.45);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  opacity: 0;
+  transition: opacity var(--trans);
+  border-radius: inherit;
+}
+.galeria-item:hover .galeria-overlay,
+.galeria-item:focus .galeria-overlay { opacity: 1; }
+
+/* Imagen en el lightbox */
+.galeria-ampliada {
+  max-height: 72vh;
+  object-fit: contain;
+}
+
+/* ----------------------------------------------------------------
+   10. FAQ
+---------------------------------------------------------------- */
+.faq-img {
+  max-height: 220px;
+  object-fit: contain;
+  filter: drop-shadow(0 6px 16px rgba(0,0,0,.18));
+  transition: transform var(--trans);
+}
+.faq-img:hover { transform: scale(1.04) rotate(-2deg); }
+
+.accordion-button:not(.collapsed) {
+  background: #fef3f2;
+  color: var(--color-primario);
+}
+.accordion-button:focus {
+  box-shadow: 0 0 0 .2rem rgba(231,76,60,.25);
+}
+
+/* ----------------------------------------------------------------
+   11. FORMULARIO DE CONTACTO
+---------------------------------------------------------------- */
+.contacto-section {
+  background: linear-gradient(180deg, #fdf6f0 0%, #fff 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Imagen decorativa lateral grande */
+.contacto-deco {
+  position: absolute;
+  right: -40px;
+  bottom: 0;
+  z-index: 0;
+  pointer-events: none;
+  align-items: flex-end;
+}
+.contacto-deco-img {
+  height: 420px;
+  object-fit: contain;
+  opacity: .18;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,.1));
+}
+
+/* El formulario debe ir encima de la decoración */
+.contacto-section .row { position: relative; z-index: 1; }
+
+/* Cabecera visual del formulario con imagen */
+.contacto-card-header {
+  background: linear-gradient(135deg, #e74c3c 0%, #9b59b6 100%);
+}
+.form-header-img {
+  height: 110px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 8px rgba(0,0,0,.25));
+}
+
+/* Mejoras de inputs */
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--color-cielo);
+  box-shadow: 0 0 0 .2rem rgba(52,152,219,.25);
+}
+
+/* Contador de caracteres */
+#contadorCaracteres {
+  font-size: 1rem;
+  font-weight: 800;
+  transition: color var(--trans);
+}
+
+/* ----------------------------------------------------------------
+   12. FOOTER
+---------------------------------------------------------------- */
+.footer-logo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,.3));
+}
+
+.social-icon {
+  text-decoration: none;
+  transition: color var(--trans), transform var(--trans);
+}
+.social-icon:hover,
+.social-icon:focus {
+  color: var(--color-secundario) !important;
+  transform: translateY(-3px) scale(1.15);
+}
+
+.footer-link {
+  transition: color var(--trans), padding-left var(--trans);
+}
+.footer-link:hover,
+.footer-link:focus {
+  color: var(--color-secundario) !important;
+  padding-left: 4px;
+}
+
+/* ----------------------------------------------------------------
+   13. BOTÓN VOLVER ARRIBA
+---------------------------------------------------------------- */
+.btn-arriba {
+  width: 3.2rem;
+  height: 3.2rem;
+  bottom: 2rem;
+  right: 2rem;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  z-index: 1050;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--trans), transform var(--trans);
+}
+.btn-arriba.visible {
+  opacity: 1;
+  pointer-events: auto;
+}
+.btn-arriba:hover {
+  transform: translateY(-4px);
+}
+
+/* ----------------------------------------------------------------
+   14. MODALES — TAMAÑOS DE IMÁGENES
+---------------------------------------------------------------- */
+.modal-personaje-img {
+  max-height: 200px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.2));
+}
+.modal-ep-img {
+  max-height: 180px;
+  object-fit: contain;
+  filter: drop-shadow(0 4px 10px rgba(0,0,0,.2));
+}
+
+/* ----------------------------------------------------------------
+   15. RESPONSIVE — AJUSTES ADICIONALES
+---------------------------------------------------------------- */
+@media (max-width: 575.98px) {
+  .hero-titulo     { font-size: 2.2rem; }
+  .hero-img        { max-height: 260px; }
+  .personaje-img   { height: 130px; }
+  .episodio-img    { height: 180px; }
+  .banner-col      { display: none; }
+}
+
+@media (min-width: 576px) and (max-width: 991.98px) {
+  .hero-img        { max-height: 380px; }
+  .banner-col      { max-height: 300px; }
+}
+
+/* ----------------------------------------------------------------
+   16. ANIMACIONES
+---------------------------------------------------------------- */
+@keyframes flotarHero {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-20px); }
+}
+
+@keyframes flotarDeco {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  50%       { transform: translateY(-10px) rotate(3deg); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Aplica la animación a cards al cargar (JS la restablece con IntersectionObserver) */
+.card { animation: fadeInUp .45s ease both; }
+
+/* ----------------------------------------------------------------
+   17. ACCESIBILIDAD — FOCUS VISIBLE
+   Asegura contraste suficiente para usuarios de teclado
+---------------------------------------------------------------- */
+:focus-visible {
+  outline: 3px solid var(--color-secundario);
+  outline-offset: 3px;
+  border-radius: 3px;
+}
+.btn:focus-visible,
+.nav-link:focus-visible,
+.form-control:focus-visible,
+.form-select:focus-visible,
+.accordion-button:focus-visible {
+  outline: 3px solid var(--color-secundario);
+  outline-offset: 2px;
+}
+
+/* Scrollbar personalizado (WebKit) */
+::-webkit-scrollbar       { width: 8px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: var(--color-primario); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: #c0392b; }
